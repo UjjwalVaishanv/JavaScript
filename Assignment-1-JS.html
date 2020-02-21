@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Assignment-3-HTML</title>
+</head>
+
+<body onload="myFunction()">
+<form id="empdetails">
+	First Name:<br>
+	<input type="text" name="fname" id="fname"/><br><br>
+	Last Name:<br>
+	<input type="text" name="lname"/><br><br>
+	Email:<br>
+	<input type="email" name="email"/><br><br>
+	Contact Number:<br>
+	<input type="number" name="number"/><br><br>
+	Address:<br>
+	<textarea name="Address"></textarea><br><br>
+	Username:<br>
+	<input type="text" name="uname"/><br><br>
+	Password:<br>
+	<input type="Password" name="pass"/><br><br>
+
+	Gender:<br>
+	<input type="radio" name="gender" value="Male">Male</input><br>
+	<input type="radio" name="gender" value="Female">Female</input><br><br>
+
+	Qualification:<br>
+	<select name="qualification" id="qualification">	
+	</select><br><br>
+
+	Experience:<br>
+	<select name="Experience" id="experience">	
+	</select><br><br>
+
+	Coding Languages:<br><div id="codinglang"></div>
+	
+	<input type="submit" value="Submit" onclick="printLog(event);"/>
+</form>
+<script type="text/javascript">
+
+function myFunction() {
+var quaList = document.getElementById('qualification').options;
+var options = [
+{
+	text: 'MCA',
+        value: 'MCA',
+        selected: true
+},
+{
+        text: 'BCA',
+        value: 'BCA',
+},
+{
+        text: 'B.TECH',
+        value: 'B.TECH'
+}];
+
+options.forEach(option =>quaList.add(new Option(option.text, option.value, option.selected))); 
+
+var expList = document.getElementById('experience').options;
+var options = [{
+text: '0',
+value: '0',
+selected: true
+},
+{
+text: '1',
+value: '1',    
+},
+{
+text: '2',
+value: '2'
+}];
+
+options.forEach(option =>expList.add(new Option(option.text, option.value, option.selected)));
+}
+
+var languages=[];
+var div=document.getElementById("codinglang");
+function codinglanguage(name,ischecked)
+	{
+		this.name=name;
+		this.ischecked=ischecked;
+	}
+	var lang1=new codinglanguage("C#",true);
+	var lang2=new codinglanguage("C",false);
+	var lang3=new codinglanguage("C++",false);
+	var lang4=new codinglanguage("php",false);
+	var lang5=new codinglanguage("java",true);
+  	languages.push(lang1,lang2,lang3,lang4,lang5);
+  	for(i=0;languages[i]!=null;i++)
+  	{
+  		var checkbox=document.createElement('input');
+  		checkbox.type="checkbox";
+  		checkbox.name=languages[i].name;
+  		checkbox.nodeValue=languages[i].name;
+  		checkbox.checked=languages[i].ischecked;
+  		checkbox.id=i;
+  		var label=document.createElement('label');
+  		label.htmlFor=i;
+  		label.appendChild(document.createTextNode(languages[i].name))
+  		div.appendChild(checkbox);
+  		div.appendChild(label);
+  	}
+
+function printLog(e) 
+{
+	e.preventDefault();
+	var output_info = document.getElementById("empdetails");
+	var display = document.getElementById("display");
+	var data = output_info.querySelectorAll("input:not([type=submit]), select");
+	for (var i = 0; i < data.length; i++) 
+	{
+		console.log(  data[i].name + " : " + data[i].value )
+	}
+}
+</script>
+</body>
+</html>
